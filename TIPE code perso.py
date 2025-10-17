@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
 """
-Created on Fri Oct  3 14:12:37 2025
-
-@author: clemc
+Ce code python permet de 
 """
+#=== Librairies ===
 import math
 import matplotlib.pyplot as plt
 import numpy as np
 
+
+#=== Fonctions ===
 def lire_fichier_lidar(nom_fichier):
     angles = []
     distances = []
@@ -54,7 +54,6 @@ def polar_to_cartesian(angles, distances):
         return x_coords, y_coords
 
 
-# === Lecture du fichier ===
 def lecture_fichier(fichier):
     angles, distances = lire_fichier_lidar(fichier)
     
@@ -63,22 +62,18 @@ def lecture_fichier(fichier):
         if -15 <= ang <= 15 or ang >= 345:
             x, y = polar_to_cartesian(ang, dist)
             lis_x.append(x)
-            lis_y.append(y)
-    a = 0; b = 0       
-    droite = np.polyfit(lis_x, lis_y, 1)  # y = a*x + b
-    a, b = droite
-    
+            lis_y.append(y)      
+    a, b = np.polyfit(lis_x, lis_y, 1)  # y = a*x + b
+
     # === Calcul de la distance Lidar mur ===
     
     d = math.fabs(b) / ((a**2 + 1)**0.5)
-    
-    print(f"Mur : y = {a:.3f}x + {b:.3f}")
-    print(f"Dist = {d:.3f}")
+    print(fichier)
+    print(f"Mur (régression linéaire) : y = {a:.3f}x + {b:.3f}")
+    print(f"Distance entre (0, 0) et le mur obtenue via régression linéaire : {d:.3f}\n")
     return float(f"{d:.2f}")
 
 
-dists = [50, 112, 200, 300, 500]
-nb = [1, 2, 3, 4, 5]
 def noms_fichiers(dists,nb):
     txt = []
     for di in range(len(dists)):
@@ -87,23 +82,19 @@ def noms_fichiers(dists,nb):
     return txt
 
 
-txt = noms_fichiers(dists,nb)
+#=== Variables ===
+dists = [50, 112, 200, 300, 500]
+nb = [1, 2, 3, 4, 5]
 dist_fin = []
+
+
+#=== Code ===
+txt = noms_fichiers(dists,nb)
+
 for i in range(len(txt)):
     dist_fin.append(lecture_fichier(txt[i]))
 
-
 print(dist_fin)
-
-
-
-
-
-
-
-
-
-
 
 
 
