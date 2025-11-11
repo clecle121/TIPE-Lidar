@@ -51,7 +51,7 @@ def polar_to_cartesian(angles, distances):
             y = dist * math.sin(rad)
             x_coords.append(x)
             y_coords.append(y)
-        return x_coords, y_coords #hello
+        return x_coords, y_coords
 
 
 def lecture_fichier(fichier):
@@ -63,7 +63,7 @@ def lecture_fichier(fichier):
             x, y = polar_to_cartesian(ang, dist)
             lis_x.append(x)
             lis_y.append(y)      
-    a, b = np.polyfit(lis_x, lis_y, 1)  # y = a*x + b
+    a, b = np.polyfit(lis_x, lis_y, 1)  # y = a*x + b bonjour
 
     # === Calcul de la distance Lidar mur ===
     
