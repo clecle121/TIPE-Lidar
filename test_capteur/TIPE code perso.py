@@ -1,4 +1,5 @@
 """
+Ce code python permet de faire des calculs. je suis pas d'accord.
 Ce code python permet de faire des calculs. en aye A.
 """
 #=== Librairies ===
