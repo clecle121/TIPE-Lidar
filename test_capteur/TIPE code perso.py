@@ -1,5 +1,5 @@
 """
-Ce code python permet de faire des calculs. en effet.
+Ce code python permet de faire des calculs. en aye A.
 """
 #=== Librairies ===
 import math
@@ -87,6 +87,7 @@ dists = [50, 112, 200, 300, 500]
 nb = [1, 2, 3, 4, 5]
 dist_fin = []
 
+#test 2
 
 #=== Code ===
 txt = noms_fichiers(dists,nb)
