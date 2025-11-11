@@ -1,5 +1,5 @@
 """
-Ce code python permet de faire des calculs
+Ce code python permet de faire des calculs. en effet.
 """
 #=== Librairies ===
 import math
