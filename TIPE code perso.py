@@ -51,7 +51,7 @@ def polar_to_cartesian(angles, distances):
             y = dist * math.sin(rad)
             x_coords.append(x)
             y_coords.append(y)
-        return x_coords, y_coords
+        return x_coords, y_coords #hello
 
 
 def lecture_fichier(fichier):
