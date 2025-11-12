@@ -12,7 +12,7 @@ import numpy as np
 def lire_fichier_lidar(nom_fichier):
     angles = []
     distances = []
-    with open(nom_fichier, "r") as f:
+    with open('Valeur lidar/' + nom_fichier, "r") as f:
         for ligne in f:
             if ligne.startswith("#") or "Angule" in ligne:
                 continue

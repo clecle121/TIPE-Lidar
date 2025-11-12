@@ -1,6 +1,9 @@
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+import os
+
+os.chdir('test_capteur/valeurs_lidar') #Permet de changer le répertoire de travail. Ici je déplace le répertoire de travail dans le dossier "valeurs_lidar" pour avoir accès au fichier qui se trouve à l'intérieur.
 
 def lire_fichier_lidar(nom_fichier):
     angles = []
