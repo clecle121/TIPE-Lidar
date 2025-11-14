@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May 27 12:01:20 2021
-
-@author: nicov
-"""
-import os
-os.environ["OMP_NUM_THREADS"] = "1"
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-
 from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
+
+import os
+os.environ["OMP_NUM_THREADS"] = "1"
+os.chdir('test_capteur/valeurs_lidar')
 
 def lire_fichier_lidar(nom_fichier):
     angles = []
@@ -60,11 +55,69 @@ def traiter_les_coo(txt):
 
 ######### Valeurs
 
-txt = f"Valeurs Lidar/test500cmV5.txt"
+txt = f"test450cmV5.txt"
 donnees = traiter_les_coo(txt)
 K= 2
 KM=KMeans(n_clusters=K, random_state=170)
 
+labels_predits = KM.fit_predict(donnees)
+
+#affichage des nuages de points colorés en fonction du label prédit
+Donnees_par_classe=[]
+marqueurs=['.','*','o','v','^','d','+']
+fig, ax = plt.subplots()
+
+
+
+
+
+
+#############################################################################################################
+#              I - Clustering et algorithme K-Mean   #########################################################
+#############################################################################################################
+
+#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#------------ 1)  importation des données ------------------------------
+
+#***********************
+# 1er jeu de données
+#***********************
+donnees=[]
+
+f=open('finch_beaks_1975.csv')
+texte=f.readlines()
+f.close()
+for i in range(1,len(texte)):
+    L=texte[i].rstrip('\n\r')
+    L=L.split(',')
+    longueur,profondeur=float(L[2]),float(L[3])
+    donnees.append([longueur,profondeur])
+
+
+
+#***********************
+# 2ème jeu de données
+#***********************    
+donnees=[]    
+f=open('finch_beaks_2012.csv')
+texte=f.readlines()
+f.close()
+for i in range(1,len(texte)):
+    L=texte[i].rstrip('\n\r')
+    L=L.split(',')
+    _ ,longueur,profondeur=L[1],float(L[2]),float(L[3])
+    donnees.append([longueur,profondeur])
+
+
+
+
+#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#--------------------- 3)  nombre optimal de clusters -------------------------------------
+
+
+
+K= 2
+KM=KMeans(n_clusters=K, random_state=170)
 labels_predits = KM.fit_predict(donnees)
 
 #affichage des nuages de points colorés en fonction du label prédit
@@ -81,8 +134,8 @@ for classe in L_type_de_classes:
     Y=[]
     for i in range(len(donnees)):
         if classe ==labels_predits[i]:
-            X.append(donnees[i][0])
-            Y.append(donnees[i][1])
+            X.append(donnees[i])
+            Y.append(donnees[i])
     Donnees_par_classe.append([X,Y])
     ax.plot(X,Y,marqueurs[classe],label='classe '+str(classe))
 

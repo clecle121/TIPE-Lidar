@@ -1,3 +1,6 @@
+import math
+
+
 def lire_fichier_lidar(nom_fichier):
     '''
     Entrée :
