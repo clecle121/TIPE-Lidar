@@ -6,9 +6,13 @@ Ce code python permet de faire des calculs. en aye A.
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+import os
+os.chdir('test_capteur/valeurs_lidar')
 
+from estimation_mur import lire_fichier_lidar #permet d'importer la fonction "lire_fichier_lidar" contenu dans le fichier "estimation_mur"
 
 #=== Fonctions ===
+'''
 def lire_fichier_lidar(nom_fichier):
     angles = []
     distances = []
@@ -23,6 +27,7 @@ def lire_fichier_lidar(nom_fichier):
             except ValueError:
                 continue
     return angles, distances
+'''
 
 """
 def polar_to_cartesian(angles, distances):
@@ -64,7 +69,7 @@ def lecture_fichier(fichier):
             x, y = polar_to_cartesian(ang, dist)
             lis_x.append(x)
             lis_y.append(y)      
-    a, b = np.polyfit(lis_x, lis_y, 1)  # y = a*x + b bonjour
+    a, b = np.polyfit(lis_x, lis_y, 1)
 
     # === Calcul de la distance Lidar mur ===
     
