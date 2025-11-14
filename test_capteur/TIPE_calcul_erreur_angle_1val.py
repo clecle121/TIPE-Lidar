@@ -2,9 +2,11 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+from TIPE_fonctions import *
 
 os.chdir('test_capteur/valeurs_lidar') #Permet de changer le répertoire de travail. Ici je déplace le répertoire de travail dans le dossier "valeurs_lidar" pour avoir accès au fichier qui se trouve à l'intérieur.
 
+'''
 def lire_fichier_lidar(nom_fichier):
     angles = []
     distances = []
@@ -19,7 +21,8 @@ def lire_fichier_lidar(nom_fichier):
             except ValueError:
                 continue
     return angles, distances
-
+'''
+'''
 def polar_to_cartesian(angles, distances):
     points = []
     for angle, dist in zip(angles, distances):
@@ -28,6 +31,7 @@ def polar_to_cartesian(angles, distances):
         y = dist * math.sin(rad)
         points.append((x, y))
     return points
+'''
 
 # === Lecture du fichier ===
 fichier = "test500cmV1.txt"

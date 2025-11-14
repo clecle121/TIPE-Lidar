@@ -31,7 +31,7 @@ def noms_fichiers(dists,nb):
 def polar_to_cartesian(angles, distances):
     '''
     '''
-    if isinstance(angles, float) and isinstance(distances, float):
+    if isinstance(angles, float) and isinstance(distances, float): #??? "isinstance"
         rad = math.radians(angles)
         x = distances * math.cos(rad)
         y = distances * math.sin(rad)
@@ -39,7 +39,7 @@ def polar_to_cartesian(angles, distances):
     else:
         x_coords = []
         y_coords = []
-        for angle, dist in zip(angles, distances):
+        for angle, dist in zip(angles, distances): #Expliquer le "zip"
             rad = math.radians(angle)
             x = dist * math.cos(rad)
             y = dist * math.sin(rad)
