@@ -1,6 +1,8 @@
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+import os
+os.chdir('test_capteur/valeurs_lidar')
 
 def lire_fichier_lidar(nom_fichier):
     angles = []
@@ -27,7 +29,7 @@ def polar_to_cartesian(angles, distances):
     return points
 
 # === Lecture du fichier ===
-fichier = "test500cmV1.txt"
+fichier = "test450cmV1.txt"
 angles, distances = lire_fichier_lidar(fichier)
 points = polar_to_cartesian(angles, distances)
 

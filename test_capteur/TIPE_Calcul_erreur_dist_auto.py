@@ -7,6 +7,8 @@ Created on Fri Oct  3 14:12:37 2025
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+import os
+os.chdir('test_capteur/valeurs_lidar')
 
 def lire_fichier_lidar(nom_fichier):
     angles = []
@@ -70,7 +72,7 @@ def noms_fichiers(dists,nb):
     txt = []
     for di in range(len(dists)):
         for n in range(len(nb)):
-            txt.append(f"Valeurs Lidar/test{dists[di]}cmV{nb[n]}.txt")  #"test50cmV1.txt"
+            txt.append(f"test{dists[di]}cmV{nb[n]}.txt")  #"test50cmV1.txt"
     return txt
 
 
