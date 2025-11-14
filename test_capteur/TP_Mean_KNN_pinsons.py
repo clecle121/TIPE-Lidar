@@ -44,79 +44,24 @@ def traiter_les_coo(txt):
     don = []
     angles, dista = lire_fichier_lidar(txt)
     lis_x = []; lis_y = []
+    
     for ang, dis in zip(angles, dista):
         for i in range(len(angles)):
             x, y = polar_to_cartesian(angles[i], dista[i])
             lis_x.append(x)
             lis_y.append(y)
-            don.append([lis_x,lis_y])
+            don.append([x,y])
     return don
 
 
 ######### Valeurs
 
-txt = f"test450cmV5.txt"
+txt = "test450cmV5.txt"
 donnees = traiter_les_coo(txt)
-K= 2
-KM=KMeans(n_clusters=K, random_state=170)
 
-labels_predits = KM.fit_predict(donnees)
+ ######## Nombre de clusters
+K= 25
 
-#affichage des nuages de points colorés en fonction du label prédit
-Donnees_par_classe=[]
-marqueurs=['.','*','o','v','^','d','+']
-fig, ax = plt.subplots()
-
-
-
-
-
-
-#############################################################################################################
-#              I - Clustering et algorithme K-Mean   #########################################################
-#############################################################################################################
-
-#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-#------------ 1)  importation des données ------------------------------
-
-#***********************
-# 1er jeu de données
-#***********************
-donnees=[]
-
-f=open('finch_beaks_1975.csv')
-texte=f.readlines()
-f.close()
-for i in range(1,len(texte)):
-    L=texte[i].rstrip('\n\r')
-    L=L.split(',')
-    longueur,profondeur=float(L[2]),float(L[3])
-    donnees.append([longueur,profondeur])
-
-
-
-#***********************
-# 2ème jeu de données
-#***********************    
-donnees=[]    
-f=open('finch_beaks_2012.csv')
-texte=f.readlines()
-f.close()
-for i in range(1,len(texte)):
-    L=texte[i].rstrip('\n\r')
-    L=L.split(',')
-    _ ,longueur,profondeur=L[1],float(L[2]),float(L[3])
-    donnees.append([longueur,profondeur])
-
-
-
-
-#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-#--------------------- 3)  nombre optimal de clusters -------------------------------------
-
-
-
-K= 2
 KM=KMeans(n_clusters=K, random_state=170)
 labels_predits = KM.fit_predict(donnees)
 
@@ -124,7 +69,6 @@ labels_predits = KM.fit_predict(donnees)
 import matplotlib.pyplot as plt
 
 Donnees_par_classe=[]
-marqueurs=['.','*','o','v','^','d','+']
 fig, ax = plt.subplots()
 
 L_type_de_classes=np.unique(labels_predits)
@@ -134,12 +78,14 @@ for classe in L_type_de_classes:
     Y=[]
     for i in range(len(donnees)):
         if classe ==labels_predits[i]:
-            X.append(donnees[i])
-            Y.append(donnees[i])
+            X.append(donnees[i][0])
+            Y.append(donnees[i][1])
     Donnees_par_classe.append([X,Y])
-    ax.plot(X,Y,marqueurs[classe],label='classe '+str(classe))
+    ax.plot(X,Y,'+')     #,label='classe '+str(classe)
 
-ax.plot(KM.cluster_centers_[:,0],KM.cluster_centers_[:,1],c='r')
+#ax.plot(KM.cluster_centers_[:,0],KM.cluster_centers_[:,1],c='r')
 ax.set_xlabel('Longueur du bec')
 ax.set_ylabel('Profondeur du bec')
 ax.legend()
+ax.grid(True)
+plt.show()
