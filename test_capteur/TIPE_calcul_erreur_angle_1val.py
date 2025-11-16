@@ -62,6 +62,7 @@ x_min, x_max = min(x_sel), max(x_sel)
 x_line = np.linspace(x_min, x_max, 100)
 y_line = a * x_line + b
 
+
 # === Affichage graphique ===
 x_vals, y_vals = zip(*points)
 plt.figure(figsize=(8,8))
@@ -73,6 +74,7 @@ plt.axhline(0, color="black", linewidth=0.5)
 plt.axvline(0, color="black", linewidth=0.5)
 plt.gca().set_aspect("equal", adjustable="datalim")
 
+
 # Ajouter l’équation sur le graphique
 plt.text(
     0.05, 0.95,
@@ -82,6 +84,7 @@ plt.text(
     verticalalignment="top",
     bbox=dict(facecolor="white", alpha=0.7, edgecolor="black")
 )
+
 
 plt.title("Nuage de points LIDAR + Droite du mur estimée")
 plt.xlabel("X (mm)")

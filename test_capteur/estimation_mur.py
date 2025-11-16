@@ -1,6 +1,8 @@
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+import os
+os.chdir('test_capteur/valeurs_lidar')
 
 def lire_fichier_lidar(nom_fichier):
     angles = []
