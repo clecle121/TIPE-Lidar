@@ -30,11 +30,23 @@ x_sel, y_sel = zip(*points_selection)
 a, b = np.polyfit(x_sel, y_sel, 1)  # y = a*x + b
 print(f"Équation de la droite du mur : y = {a:.3f}x + {b:.3f}")
 
-
 # Génération des points de la droite pour le tracé
 x_min, x_max = min(x_sel), max(x_sel)
 x_line = np.linspace(x_min, x_max, 100)
 y_line = a * x_line + b
+
+
+# équation de la droite perpendiculaire à la regression linéaire passant par (0, 0)
+m = -1/a #Pour des doites perpendiculaires le produit de leur coefficients directeur fait -1 et on sait que la droite qu'on charche passe pas (0, 0) donc b = 0.
+
+#
+x_perpen = []
+y_perpen = []
+for i in range(int((-b)/(a-m))+1):
+    x_perpen.append(i)
+    y_perpen.append(m * i)  
+
+#centre = (0, 0) #pas d'utiliter pour le moment. tracer l'angle sur le graphique.
 
 
 # === Affichage graphique ===
@@ -43,6 +55,7 @@ plt.figure(figsize=(8,8))
 plt.scatter(x_vals, y_vals, c="red", s=5, label="Points LIDAR") #"c" permet de modifier les couleurs des points et "s" permet de modifier la taille des points.
 plt.scatter(x_sel, y_sel, c="blue", s=10, label="Points mur")
 plt.plot(x_line, y_line, "g-", linewidth=2, label="Mur estimé")
+plt.plot(x_perpen, y_perpen, "m-", linewidth=2, label="droite perpend au mur")
 plt.axhline(0, color="black", linewidth=0.5) #permet de placer un ligne horizontale sur le graphique
 plt.axvline(0, color="black", linewidth=0.5) #permet de placer un ligne verticale sur le graphique
 plt.gca().set_aspect("equal", adjustable="datalim") #permet de faire en sorte que les axes soient équivalent
