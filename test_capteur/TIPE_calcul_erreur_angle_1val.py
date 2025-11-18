@@ -8,7 +8,7 @@ os.chdir('test_capteur/valeurs_lidar') #Permet de changer le répertoire de trav
 
 
 # === Lecture du fichier ===
-fichier = "test500cmV1.txt"
+fichier = "test500cmV1.txt" #Nom du fichier que l'on veux étudier
 angles, distances = lire_fichier_lidar(fichier)
 points = polar_to_cartesian(angles, distances)
 
@@ -16,9 +16,9 @@ points = polar_to_cartesian(angles, distances)
 # Sélection des points autour de 0° (±10°)
 angles_selection = []
 points_selection = []
-for ang, dist in zip(angles, distances):
-    if -10 <= ang <= 10 or ang >= 350:  # autour de 0°, tenir compte du tour
-        rad = math.radians(ang)
+for ang, dist in zip(angles, distances): #Voir l'explication sur GPT pour le zip mais en vif permet de prendre un part un les éléments de 2 listes pour en faire des trucs.
+    if -10 <= ang <= 10 or ang >= 350: #Permet de ne prendre en compte que les valeurs autour de ±10°
+        rad = math.radians(ang) #Convertit les angles normalement en ° en rad
         x = dist * math.cos(rad)
         y = dist * math.sin(rad)
         angles_selection.append(ang)
@@ -27,8 +27,7 @@ for ang, dist in zip(angles, distances):
 
 # Régression linéaire sur ces points
 x_sel, y_sel = zip(*points_selection)
-coef = np.polyfit(x_sel, y_sel, 1)  # y = a*x + b
-a, b = coef
+a, b = np.polyfit(x_sel, y_sel, 1)  # y = a*x + b
 print(f"Équation de la droite du mur : y = {a:.3f}x + {b:.3f}")
 
 
@@ -41,12 +40,12 @@ y_line = a * x_line + b
 # === Affichage graphique ===
 x_vals, y_vals = zip(*points)
 plt.figure(figsize=(8,8))
-plt.scatter(x_vals, y_vals, c="red", s=5, label="Points LIDAR")
+plt.scatter(x_vals, y_vals, c="red", s=5, label="Points LIDAR") #"c" permet de modifier les couleurs des points et "s" permet de modifier la taille des points.
 plt.scatter(x_sel, y_sel, c="blue", s=10, label="Points mur")
 plt.plot(x_line, y_line, "g-", linewidth=2, label="Mur estimé")
-plt.axhline(0, color="black", linewidth=0.5)
-plt.axvline(0, color="black", linewidth=0.5)
-plt.gca().set_aspect("equal", adjustable="datalim")
+plt.axhline(0, color="black", linewidth=0.5) #permet de placer un ligne horizontale sur le graphique
+plt.axvline(0, color="black", linewidth=0.5) #permet de placer un ligne verticale sur le graphique
+plt.gca().set_aspect("equal", adjustable="datalim") #permet de faire en sorte que les axes soient équivalent
 
 
 # Ajouter l’équation sur le graphique
