@@ -39,14 +39,15 @@ y_line = a * x_line + b
 # équation de la droite perpendiculaire à la regression linéaire passant par (0, 0)
 m = -1/a #Pour des doites perpendiculaires le produit de leur coefficients directeur fait -1 et on sait que la droite qu'on charche passe pas (0, 0) donc b = 0.
 
-#
+#calcul des points de la droite ainsi que l'angle
 x_perpen = []
 y_perpen = []
 for i in range(int((-b)/(a-m))+1):
     x_perpen.append(i)
     y_perpen.append(m * i)  
 
-#centre = (0, 0) #pas d'utiliter pour le moment. tracer l'angle sur le graphique.
+erreur_angle = math.degrees(np.arctan(m))
+print(erreur_angle)
 
 
 # === Affichage graphique ===
