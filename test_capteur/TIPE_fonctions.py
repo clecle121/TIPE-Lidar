@@ -3,8 +3,13 @@ import math
 
 def lire_fichier_lidar(nom_fichier):
     '''
+    Permet de récuperer seulement les angles et les distances dans un fichier d'aquisition de mesure du capteur lidar.
+
     Entrée :
-    Sortie : 
+    nom_fichier: (str) correspond au nom du fichier dont on veut récuperer les valeurs.
+
+    Sortie :
+    (list with float) renvoie deux listes, une appelé "angles" et l'autre "distances".
     '''
     angles = []
     distances = []
@@ -20,6 +25,19 @@ def lire_fichier_lidar(nom_fichier):
                 continue
     return angles, distances
 
+    angles = []
+    distances = []
+    with open(nom_fichier, "r") as f:
+        for ligne in f:
+            if ligne.startswith("#") or "Angule" in ligne:
+                continue
+            try:
+                angle, distance, quality = ligne.split()
+                angles.append(float(angle))
+                distances.append(float(distance))
+            except ValueError:
+                continue
+    return angles, distances
 
 def noms_fichiers(dists,nb):
     '''
@@ -31,6 +49,9 @@ def noms_fichiers(dists,nb):
     return txt
 
 
+#Il y a deux polar_to_cartesian différent lequel est le bon ???
+#celui ci est présent seulement dans TIPE_Calcul_erreur_dist_auto
+"""
 def polar_to_cartesian(angles, distances):
     '''
     '''
@@ -49,6 +70,16 @@ def polar_to_cartesian(angles, distances):
             x_coords.append(x)
             y_coords.append(y)
         return x_coords, y_coords
+"""
+
+def polar_to_cartesian(angles, distances):
+    points = []
+    for angle, dist in zip(angles, distances):
+        rad = math.radians(angle)
+        x = dist * math.cos(rad)
+        y = dist * math.sin(rad)
+        points.append((x, y))
+    return points
 
 
 def lecture_fichier(fichier):

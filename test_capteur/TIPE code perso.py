@@ -9,7 +9,7 @@ import numpy as np
 import os
 os.chdir('test_capteur/valeurs_lidar')
 
-from estimation_mur import lire_fichier_lidar #permet d'importer la fonction "lire_fichier_lidar" contenu dans le fichier "estimation_mur"
+from TIPE_fonctions import lire_fichier_lidar #permet d'importer la fonction "lire_fichier_lidar" contenu dans le fichier "estimation_mur"
 
 #=== Fonctions ===
 '''
@@ -72,8 +72,8 @@ def lecture_fichier(fichier):
     a, b = np.polyfit(lis_x, lis_y, 1)
 
     # === Calcul de la distance Lidar mur ===
-    
     d = math.fabs(b) / ((a**2 + 1)**0.5)
+    print("a", a, "b", b)
     print(fichier)
     print(f"Mur (régression linéaire) : y = {a:.3f}x + {b:.3f}")
     print(f"Distance entre (0, 0) et le mur obtenue via régression linéaire : {d:.3f}\n")

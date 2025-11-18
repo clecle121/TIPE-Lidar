@@ -2,7 +2,10 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-os.chdir('test_capteur/valeurs_lidar')
+
+print("toto")
+print('Répertoire courant = ' + os.getcwd())
+os.chdir('test_capteur\\valeurs_lidar') #Il est possible de mettre soit 2 \ ou 1 / pour naviguer entre les fichiers
 
 def lire_fichier_lidar(nom_fichier):
     angles = []
