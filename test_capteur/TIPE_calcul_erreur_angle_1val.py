@@ -8,7 +8,7 @@ os.chdir('test_capteur/valeurs_lidar') #Permet de changer le répertoire de trav
 
 
 # === Lecture du fichier ===
-fichier = "test500cmV1.txt" #Nom du fichier que l'on veux étudier
+fichier = "test500cmV1.txt" #Nom du fichier que l'on veut étudier
 angles, distances = lire_fichier_lidar(fichier)
 points = polar_to_cartesian(angles, distances)
 
@@ -17,8 +17,8 @@ points = polar_to_cartesian(angles, distances)
 angles_selection = []
 points_selection = []
 for ang, dist in zip(angles, distances): #Voir l'explication sur GPT pour le zip mais en vif permet de prendre un part un les éléments de 2 listes pour en faire des trucs.
-    if -10 <= ang <= 10 or ang >= 350: #Permet de ne prendre en compte que les valeurs autour de ±10°
-        rad = math.radians(ang) #Convertit les angles normalement en ° en rad
+    if -10 <= ang <= 10 or ang >= 350: #Permet de prendre en compte uniquement les valeurs autour de ±10°
+        rad = math.radians(ang) #Convertit les angles de ° à rad
         x = dist * math.cos(rad)
         y = dist * math.sin(rad)
         angles_selection.append(ang)
@@ -34,12 +34,12 @@ print(f"Équation de la droite du mur : y = {a:.3f}x + {b:.3f}")
 x_min, x_max = min(x_sel), max(x_sel)
 x_line = np.linspace(x_min, x_max, 100)
 y_line = a * x_line + b
-
+print(x_min)
 
 # équation de la droite perpendiculaire à la regression linéaire passant par (0, 0)
-m = -1/a #Pour des doites perpendiculaires le produit de leur coefficients directeur fait -1 et on sait que la droite qu'on charche passe pas (0, 0) donc b = 0.
+m = -1/a #Pour des droites perpendiculaires le produit de leur coefficients directeur fait -1 et on sait que la droite qu'on cherche passe pas (0, 0) donc b = 0.
 
-#calcul des points de la droite ainsi que l'angle
+# calcul des points de la droite ainsi que l'angle
 x_perpen = []
 y_perpen = []
 for i in range(int((-b)/(a-m))+1):
@@ -50,15 +50,15 @@ erreur_angle = math.degrees(np.arctan(m))
 print(erreur_angle)
 
 
-# === Affichage graphique ===
+# === Création graphique ===
 x_vals, y_vals = zip(*points)
 plt.figure(figsize=(8,8))
 plt.scatter(x_vals, y_vals, c="red", s=5, label="Points LIDAR") #"c" permet de modifier les couleurs des points et "s" permet de modifier la taille des points.
 plt.scatter(x_sel, y_sel, c="blue", s=10, label="Points mur")
 plt.plot(x_line, y_line, "g-", linewidth=2, label="Mur estimé")
 plt.plot(x_perpen, y_perpen, "m-", linewidth=2, label="droite perpend au mur")
-plt.axhline(0, color="black", linewidth=0.5) #permet de placer un ligne horizontale sur le graphique
-plt.axvline(0, color="black", linewidth=0.5) #permet de placer un ligne verticale sur le graphique
+plt.axhline(0, color="black", linewidth=0.5) #permet de placer une ligne horizontale sur le graphique
+plt.axvline(0, color="black", linewidth=0.5) #permet de placer une ligne verticale sur le graphique
 plt.gca().set_aspect("equal", adjustable="datalim") #permet de faire en sorte que les axes soient équivalent
 
 
