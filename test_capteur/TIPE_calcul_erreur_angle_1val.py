@@ -24,7 +24,7 @@ for ang, dist in zip(angles, distances): #Voir l'explication sur GPT pour le zip
         points_selection.append((x, y))
 
 
-# === éstimation du mur ===
+# === Éstimation du mur ===
 # Régression linéaire sur ces points
 x_sel, y_sel = zip(*points_selection)
 a, b = np.polyfit(x_sel, y_sel, 1)  # y = a*x + b
@@ -37,7 +37,7 @@ y_line = a * x_line + b
 print(x_min)
 
 
-# === éstimation laser ===
+# === Éstimation laser ===
 """
 On cherche l'équation de la droite perpendiculaire à la regression linéaire passant par (0, 0).
 Or pour des droites perpendiculaires le produit de leur coefficients directeur fait -1.
