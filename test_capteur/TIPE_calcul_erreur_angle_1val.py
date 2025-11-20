@@ -2,7 +2,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from TIPE_fonctions import *
+from TIPE_fonctions import * #Importe toutes les fonctions présentent dans le fichier "TIPE_fonctions"
 
 os.chdir('test_capteur/valeurs_lidar') #Permet de changer le répertoire de travail. Ici je déplace le répertoire de travail dans le dossier "valeurs_lidar" pour avoir accès au fichier qui se trouve à l'intérieur.
 
@@ -11,7 +11,6 @@ os.chdir('test_capteur/valeurs_lidar') #Permet de changer le répertoire de trav
 fichier = "test500cmV1.txt" #Nom du fichier que l'on veut étudier
 angles, distances = lire_fichier_lidar(fichier)
 points = polar_to_cartesian(angles, distances)
-
 
 # Sélection des points autour de 0° (±10°)
 angles_selection = []
@@ -25,6 +24,7 @@ for ang, dist in zip(angles, distances): #Voir l'explication sur GPT pour le zip
         points_selection.append((x, y))
 
 
+# === éstimation du mur ===
 # Régression linéaire sur ces points
 x_sel, y_sel = zip(*points_selection)
 a, b = np.polyfit(x_sel, y_sel, 1)  # y = a*x + b
@@ -36,8 +36,14 @@ x_line = np.linspace(x_min, x_max, 100)
 y_line = a * x_line + b
 print(x_min)
 
-# équation de la droite perpendiculaire à la regression linéaire passant par (0, 0)
-m = -1/a #Pour des droites perpendiculaires le produit de leur coefficients directeur fait -1 et on sait que la droite qu'on cherche passe pas (0, 0) donc b = 0.
+
+# === éstimation laser ===
+"""
+On cherche l'équation de la droite perpendiculaire à la regression linéaire passant par (0, 0).
+Or pour des droites perpendiculaires le produit de leur coefficients directeur fait -1.
+Et on sait que la droite qu'on cherche passe pas (0, 0) donc p = 0 et donc pour m :
+"""
+m = -1/a
 
 # calcul des points de la droite ainsi que l'angle
 x_perpen = []
@@ -46,11 +52,13 @@ for i in range(int((-b)/(a-m))+1):
     x_perpen.append(i)
     y_perpen.append(m * i)  
 
+
+# === Calcul de l'erreur d'angle ===
 erreur_angle = math.degrees(np.arctan(m))
 print(erreur_angle)
 
 
-# === Création graphique ===
+# === Création du graphique ===
 x_vals, y_vals = zip(*points)
 plt.figure(figsize=(8,8))
 plt.scatter(x_vals, y_vals, c="red", s=5, label="Points LIDAR") #"c" permet de modifier les couleurs des points et "s" permet de modifier la taille des points.
