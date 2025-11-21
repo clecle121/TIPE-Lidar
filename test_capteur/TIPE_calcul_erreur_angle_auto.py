@@ -57,8 +57,8 @@ def lecture_fichier(fichier,x):
     
     d = math.fabs(b) / ((a**2 + 1)**0.5)
     
-    print(f"Mur : y = {a:.3f}x + {b:.3f}")
-    print(f"Dist = {d:.3f}")
+    #print(f"Mur : y = {a:.3f}x + {b:.3f}")
+    #print(f"Dist = {d:.3f}")
     return float(f"{d:.2f}")
 
 dists = [20,30,40,50,55,70,80,90,100,112,130,140,150,175,190,200,220,250,275,300,320,340,360,380,400,450,500]
@@ -76,4 +76,3 @@ txt = noms_fichiers(dists,nb)
 dist_fin = []
 for i in range(len(txt)):
     dist_fin.append(lecture_fichier(txt[i],dists[i//5]))
-print(dist_fin)
