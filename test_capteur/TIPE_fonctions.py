@@ -93,6 +93,8 @@ def polar_to_cartesian(angles, distances):
 
 
 def lecture_fichier(fichier,x):
+    '''
+    '''
     angles, distances = lire_fichier_lidar(fichier)
     alpha = math.degrees(np.arctan(650/(x*10+35)))
     lis_x = []; lis_y = []
