@@ -92,15 +92,23 @@ def polar_to_cartesian(angles, distances):
     return points
 
 
-def lecture_fichier(fichier):
-    '''
-    '''
+def lecture_fichier(fichier,x):
     angles, distances = lire_fichier_lidar(fichier)
-    
+    alpha = math.degrees(np.arctan(650/(x*10+35)))
     lis_x = []; lis_y = []
     for ang, dist in zip(angles, distances):
-        if -15 <= ang <= 15 or ang >= 345:
+        if -alpha <= ang <= alpha or ang >= 360-alpha :
             x, y = polar_to_cartesian(ang, dist)
             lis_x.append(x)
-            lis_y.append(y)      
-    a, b = np.polyfit(lis_x, lis_y, 1)
+            lis_y.append(y)
+    a = 0; b = 0       
+    droite = np.polyfit(lis_x, lis_y, 1)  # y = a*x + b
+    a, b = droite
+    
+    # === Calcul de la distance Lidar mur ===
+    
+    d = math.fabs(b) / ((a**2 + 1)**0.5)
+    
+    print(f"Mur : y = {a:.3f}x + {b:.3f}")
+    print(f"Dist = {d:.3f}")
+    return float(f"{d:.2f}")
