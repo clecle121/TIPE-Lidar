@@ -39,13 +39,21 @@ def lire_fichier_lidar(nom_fichier):
                 continue
     return angles, distances
 
-def noms_fichiers(dists,nb):
+def noms_fichiers(list_distances,numero):
     '''
+    Permet de créer et stocker rapidement le nom de tout les fichiers de mesure du lidar.
+
+    Entrée :
+    list_distances: (list with int) contient les différentes distances de mesure faite avec le lidar.
+    numero: (list with int) contient des nombres de 0 jusqu'à x. x correspond au nombre de mesure effectué au total pour une seul distance.
+
+    Sortie :
+    (list with txt) renvoie une liste appelée "txt". Elle contient les noms des fichiers de mesures.
     '''
     txt = []
-    for di in range(len(dists)):
-        for n in range(len(nb)):
-            txt.append(f"test{dists[di]}cmV{nb[n]}.txt")  #"test50cmV1.txt
+    for distance in range(len(list_distances)):
+        for i in range(len(numero)):
+            txt.append(f"test{list_distances[distance]}cmV{numero[i]}.txt")  #"test50cmV1.txt"
     return txt
 
 
@@ -73,6 +81,8 @@ def polar_to_cartesian(angles, distances):
 """
 
 def polar_to_cartesian(angles, distances):
+    '''
+    '''
     points = []
     for angle, dist in zip(angles, distances):
         rad = math.radians(angle)
