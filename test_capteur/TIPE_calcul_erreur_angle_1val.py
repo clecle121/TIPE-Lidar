@@ -69,7 +69,6 @@ plt.axhline(0, color="black", linewidth=0.5) #permet de placer une ligne horizon
 plt.axvline(0, color="black", linewidth=0.5) #permet de placer une ligne verticale sur le graphique
 plt.gca().set_aspect("equal", adjustable="datalim") #permet de faire en sorte que les axes soient équivalent
 
-
 # Ajouter l’équation sur le graphique
 plt.text(
     0.05, 0.95,
