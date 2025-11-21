@@ -10,7 +10,7 @@ os.chdir('test_capteur/valeurs_lidar') #Permet de changer le répertoire de trav
 # === Lecture du fichier ===
 fichier = "test500cmV1.txt" #Nom du fichier que l'on veut étudier
 angles, distances = lire_fichier_lidar(fichier)
-points = polar_to_cartesian(angles, distances)
+points_x, points_y = polar_to_cartesian(angles, distances)
 
 # Sélection des points autour de 0° (±10°)
 angles_selection = []
@@ -59,9 +59,8 @@ print(erreur_angle)
 
 
 # === Création du graphique ===
-x_vals, y_vals = zip(*points)
 plt.figure(figsize=(8,8))
-plt.scatter(x_vals, y_vals, c="red", s=5, label="Points LIDAR") #"c" permet de modifier les couleurs des points et "s" permet de modifier la taille des points.
+plt.scatter(points_x, points_y, c="red", s=5, label="Points LIDAR") #"c" permet de modifier les couleurs des points et "s" permet de modifier la taille des points.
 plt.scatter(x_sel, y_sel, c="blue", s=10, label="Points mur")
 plt.plot(x_line, y_line, "g-", linewidth=2, label="Mur estimé")
 plt.plot(x_perpen, y_perpen, "m-", linewidth=2, label="droite perpend au mur")
