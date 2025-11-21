@@ -83,20 +83,27 @@ def polar_to_cartesian(angles, distances):
 def polar_to_cartesian(angles, distances):
     '''
     '''
-    points = []
+    points_x = []
+    points_y = []
     for angle, dist in zip(angles, distances):
         rad = math.radians(angle)
         x = dist * math.cos(rad)
+        points_x.append(x)
         y = dist * math.sin(rad)
-        points.append((x, y))
-    return points
+        points_y.append(y)
+    return points_x, points_y
 
 
 def lecture_fichier(fichier,x):
     '''
+    Permet de ...
+    
+    Entrée :
+
+    Sortie :
     '''
     angles, distances = lire_fichier_lidar(fichier)
-    alpha = math.degrees(np.arctan(650/(x*10+35)))
+    alpha = math.degrees(np.arctan(650/(x*10+35))) #650 parce que sur un des fichier y'as un meuble qui gène donc blabla et *10 pour passer un mm et + 35mm car rayon lidar
     lis_x = []; lis_y = []
     for ang, dist in zip(angles, distances):
         if -alpha <= ang <= alpha or ang >= 360-alpha :
@@ -109,7 +116,7 @@ def lecture_fichier(fichier,x):
     
     # === Calcul de la distance Lidar mur ===
     
-    d = math.fabs(b) / ((a**2 + 1)**0.5)
+    d = math.fabs(b) / ((a**2 + 1)**0.5) # regarder les cours de maths
     
     print(f"Mur : y = {a:.3f}x + {b:.3f}")
     print(f"Dist = {d:.3f}")
