@@ -65,8 +65,8 @@ def lecture_fichier(fichier,x):
 
     print(fichier)
     print(f"Mur : y = {a:.3f}x + {b:.3f}")
-    #print(f"Dist = {d:.3f}\n")
-    print(f"Angle_moy = {erreur_angle}\n")
+    print(f"Dist = {d:.3f}")
+    print(f"Angle_moy = {erreur_angle:.3f}\n")
     return float(f"{d:.2f}")
 
 dists = [20,30,40,50,55,70,80,90,100,112,130,140,150,175,190,200,220,250,275,300,320,340,360,380,400,450,500]
