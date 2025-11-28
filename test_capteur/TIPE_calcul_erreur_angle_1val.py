@@ -48,9 +48,9 @@ m = -1/a
 # calcul des points de la droite ainsi que l'angle
 x_perpen = []
 y_perpen = []
-for i in range(int((-b)/(a-m))+1):
+for i in range(int((-b)/(a-m))+1): # int((-b)/(a-m)) permet de calculer le point de rencontre entre le mur et la droite perpendiculaire
     x_perpen.append(i)
-    y_perpen.append(m * i)  
+    y_perpen.append(m * i)
 
 
 # === Calcul de l'erreur d'angle ===
