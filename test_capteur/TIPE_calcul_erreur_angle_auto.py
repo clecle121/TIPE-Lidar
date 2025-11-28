@@ -39,6 +39,7 @@ def polar_to_cartesian(angles, distances):
             y_coords.append(y)
         return x_coords, y_coords
 
+
 # === Lecture du fichier ===
 def lecture_fichier(fichier,x):
     angles, distances = lire_fichier_lidar(fichier)
@@ -54,11 +55,18 @@ def lecture_fichier(fichier,x):
     a, b = droite
     
     # === Calcul de la distance Lidar mur ===
-    
     d = math.fabs(b) / ((a**2 + 1)**0.5)
-    
-    #print(f"Mur : y = {a:.3f}x + {b:.3f}")
-    #print(f"Dist = {d:.3f}")
+
+    # === Éstimation laser ===
+    m = -1/a
+
+    # === Calcul de l'erreur d'angle ===
+    erreur_angle = math.degrees(np.arctan(m))
+
+    print(fichier)
+    print(f"Mur : y = {a:.3f}x + {b:.3f}")
+    #print(f"Dist = {d:.3f}\n")
+    print(f"Angle_moy = {erreur_angle}\n")
     return float(f"{d:.2f}")
 
 dists = [20,30,40,50,55,70,80,90,100,112,130,140,150,175,190,200,220,250,275,300,320,340,360,380,400,450,500]
