@@ -1,0 +1,8 @@
+Alors, pour arriver à différencier des murs, on avait pensé à KMean mais l'utilité est très limitée.
+On peut donc essayer de créer une "IA" qui avec un plan arrive à produire 
+
+Il y a 3 grd types d'apprentissage pour l'IA : Apprentissage supervisé, Apprenissage non supervisé et Apprenissage par renforcement.
+Je pense effectuer un apprentissage supervisé donc il faut que j'ai des exemples en entrée (où je dis à la mackine où sont les murs)
+
+Il y a un exemple dans le livre P250 où ils expliquent comment faire un régression linéaire sans numpy
+Je vais dans essayer de le réaliser
