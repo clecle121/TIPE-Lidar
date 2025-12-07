@@ -29,7 +29,7 @@ def polar_to_cartesian(angles, distances):
     return points
 
 # === Lecture du fichier ===
-fichier = "test450cmV1.txt"
+fichier = "test500cmV1.txt"
 angles, distances = lire_fichier_lidar(fichier)
 points = polar_to_cartesian(angles, distances)
 
@@ -69,7 +69,7 @@ x_vals, y_vals = zip(*points)
 plt.figure(figsize=(8,8))
 plt.scatter(x_vals, y_vals, c="red", s=3, label="Points LIDAR")
 plt.scatter(x_sel, y_sel, c="blue", s=6, label="Points mur")
-plt.plot(x_line, y_line, "g-", linewidth=1, label="Mur estimé")
+plt.plot(x_line, y_line, "g-", linewidth=2, label="Mur estimé")
 
 plt.axhline(0, color="black", linewidth=0.5)
 plt.axvline(0, color="black", linewidth=0.5)
