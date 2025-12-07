@@ -8,6 +8,8 @@ import os
 os.environ["OMP_NUM_THREADS"] = "1"
 os.chdir('test_capteur/valeurs 2')
 
+
+
 def lire_fichier_lidar(nom_fichier):
     angles = []
     distances = []
@@ -66,7 +68,7 @@ KM=KMeans(n_clusters=K, random_state=170)
 labels_predits = KM.fit_predict(donnees)
 
 #affichage des nuages de points colorés en fonction du label prédit
-import matplotlib.pyplot as plt
+
 
 Donnees_par_classe=[]
 fig, ax = plt.subplots()
@@ -78,14 +80,14 @@ for classe in L_type_de_classes:
     Y=[]
     for i in range(len(donnees)):
         if classe ==labels_predits[i]:
-            Y.append(donnees[i][0])  #jai ici inversé X et Y
-            X.append(donnees[i][1])  #jai ici inversé X et Y
+            X.append(donnees[i][0])
+            Y.append(donnees[i][1])
     Donnees_par_classe.append([X,Y])
     ax.plot(X,Y,'+')     #,label='classe '+str(classe)
 
 #ax.plot(KM.cluster_centers_[:,0],KM.cluster_centers_[:,1],c='r')
-ax.set_xlim(-8000, 10000)
-ax.set_ylim(-8000, 6000)
+ax.set_xlim(-8000, 4000)
+ax.set_ylim(-14000, 9000)
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 #ax.legend()
