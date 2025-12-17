@@ -86,8 +86,8 @@ for classe in L_type_de_classes:
     ax.plot(X,Y,'+')     #,label='classe '+str(classe)
 
 #ax.plot(KM.cluster_centers_[:,0],KM.cluster_centers_[:,1],c='r')
-ax.set_xlim(-8000, 4000)
-ax.set_ylim(-14000, 9000)
+ax.set_xlim(-10000, 4000)
+ax.set_ylim(-14000, 10000)
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 #ax.legend()
