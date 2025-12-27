@@ -1,0 +1,88 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "CMakeLists.txt:174 (find_program)"
+    mode: "program"
+    variable: "CCACHE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ccache"
+    candidate_directories:
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Launcher/"
+      - "C:/Users/clemc/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/clemc/AppData/Local/Programs/Microsoft VS Code/bin/"
+    searched_directories:
+      - "C:/Windows/System32/ccache.com"
+      - "C:/Windows/System32/ccache.exe"
+      - "C:/Windows/System32/ccache"
+      - "C:/Windows/ccache.com"
+      - "C:/Windows/ccache.exe"
+      - "C:/Windows/ccache"
+      - "C:/Windows/System32/wbem/ccache.com"
+      - "C:/Windows/System32/wbem/ccache.exe"
+      - "C:/Windows/System32/wbem/ccache"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/ccache.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/ccache.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/ccache"
+      - "C:/Windows/System32/OpenSSH/ccache.com"
+      - "C:/Windows/System32/OpenSSH/ccache.exe"
+      - "C:/Windows/System32/OpenSSH/ccache"
+      - "C:/Program Files/Git/cmd/ccache.com"
+      - "C:/Program Files/Git/cmd/ccache.exe"
+      - "C:/Program Files/Git/cmd/ccache"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Python313/Scripts/ccache.com"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Python313/Scripts/ccache.exe"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Python313/Scripts/ccache"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Python313/ccache.com"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Python313/ccache.exe"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Python313/ccache"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Launcher/ccache.com"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Launcher/ccache.exe"
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Launcher/ccache"
+      - "C:/Users/clemc/AppData/Local/Microsoft/WindowsApps/ccache.com"
+      - "C:/Users/clemc/AppData/Local/Microsoft/WindowsApps/ccache.exe"
+      - "C:/Users/clemc/AppData/Local/Microsoft/WindowsApps/ccache"
+      - "C:/Users/clemc/AppData/Local/Programs/Microsoft VS Code/bin/ccache.com"
+      - "C:/Users/clemc/AppData/Local/Programs/Microsoft VS Code/bin/ccache.exe"
+      - "C:/Users/clemc/AppData/Local/Programs/Microsoft VS Code/bin/ccache"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\clemc\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\clemc\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\clemc\\AppData\\Local\\Programs\\Python\\Launcher\\"
+        - "C:\\Users\\clemc\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\clemc\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/clemc/AppData/Local/Programs/Python/Python313/Lib/site-packages/cmake/data/share/cmake-4.2/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:278 (project)"
+    message: |
+      The system is: Windows - 10.0.26200 - AMD64
+...

@@ -15,11 +15,11 @@ import time
 from rplidar import RPLidar
 
 # ***************************************************************
-PORT = 'COM4'
+PORT = 'COM7'
 lidar = RPLidar(PORT, baudrate=115200)
 
 lidar.start_motor()
-time.sleep(1)
+time.sleep(0.1)
 
 scan_gen = lidar.iter_scans(max_buf_meas=4000)
 
@@ -47,8 +47,8 @@ scatter = ax.scatter([], [], s=2, c='blue')
 traj_line, = ax.plot([], [], 'g-', lw=1)  # trajectoire
 
 ax.set_aspect('equal')
-ax.set_xlim(-6, 6)
-ax.set_ylim(-6, 6)
+ax.set_xlim(-2, 2)
+ax.set_ylim(-2, 2)
 ax.set_title('RPLidar 2D – Temps réel')
 ax.set_xlabel('X (m)')
 ax.set_ylabel('Y (m)')
