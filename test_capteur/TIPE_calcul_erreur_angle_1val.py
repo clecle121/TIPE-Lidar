@@ -55,7 +55,7 @@ for i in range(int((-b)/(a-m))+1): # int((-b)/(a-m)) permet de calculer le point
 
 # === Calcul de l'erreur d'angle ===
 erreur_angle = math.degrees(np.arctan(m))
-print(erreur_angle)
+print("angle obtenu :", erreur_angle)
 
 
 # === Création du graphique ===
