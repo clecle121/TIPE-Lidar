@@ -12,16 +12,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 import time
-from rplidar import RPLidar
-
-# ***************************************************************
-PORT = 'COM7'
-lidar = RPLidar(PORT, baudrate=115200)
-
-lidar.start_motor()
-time.sleep(0.1)
-
-scan_gen = lidar.iter_scans(max_buf_meas=4000)
+import rplidar.RPLidar
 
 # ***************************************************************
 def get_scan_points():
@@ -37,6 +28,16 @@ def get_scan_points():
             pts.append([x, y])
 
     return np.asarray(pts)
+
+# ***************************************************************
+PORT = 'COM7'
+lidar = rplidar.RPLidar(PORT, baudrate=115200)
+
+lidar.start_motor()
+time.sleep(0.5)
+
+scan_gen = lidar.iter_scans(max_buf_meas=4000)
+
 
 # ***************************************************************
 # Initialisation matplotlib
