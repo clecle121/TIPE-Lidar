@@ -20,11 +20,10 @@ def get_scan_points():
     pts = []
 
     for (_, angle, distance) in scan:
-        if 0.1 < distance/1000.0 < 6.0:  # filtrage 10 cm à 6 m
-            d = distance / 1000.0         # mm → m
+        if 100 < distance < 6000:  # filtrage 10 cm à 6 m
             angle_rad = math.radians(angle)
-            x = d * math.cos(angle_rad)
-            y = d * math.sin(angle_rad)
+            x = ( distance  / 1000.0 ) * math.cos(angle_rad) #ici, j'ai simplifié en faisant le passage m --> mm dans l'eq
+            y = ( distance  / 1000.0 ) * math.sin(angle_rad)
             pts.append([x, y])
 
     return np.asarray(pts)
