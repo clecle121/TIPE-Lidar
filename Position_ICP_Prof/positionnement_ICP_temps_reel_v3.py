@@ -16,8 +16,11 @@ import os
 import open3d as o3d
 from scipy.spatial import cKDTree
 
+import os
+os.chdir('test_capteur/valeurs_lidar')
+
 # ***************************************************************
-PORT = 'COM4'
+PORT = 'COM7'
 lidar = RPLidar(PORT, baudrate=115200)
 lidar.start_motor()
 time.sleep(1)
