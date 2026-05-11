@@ -10,6 +10,9 @@ Created on Fri Dec 12 18:32:37 2025
 
 import open3d as o3d
 import numpy as np
+import os
+
+os.chdir('Position_ICP_Prof') #Permet de changer le répertoire de travail. Ici je déplace le répertoire de travail dans le dossier "valeurs_lidar" pour avoir accès au fichier qui se trouve à l'intérieur.
 
 
 # Charge deux scans consecutifs LiDAR
