@@ -2,11 +2,8 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from TIPE_fonctions import *
+os.chdir('test_capteur/valeurs_lidar')
 
-os.chdir('test_capteur/valeurs_lidar') #Permet de changer le répertoire de travail. Ici je déplace le répertoire de travail dans le dossier "valeurs_lidar" pour avoir accès au fichier qui se trouve à l'intérieur.
-
-'''
 def lire_fichier_lidar(nom_fichier):
     angles = []
     distances = []
@@ -21,8 +18,7 @@ def lire_fichier_lidar(nom_fichier):
             except ValueError:
                 continue
     return angles, distances
-'''
-'''
+
 def polar_to_cartesian(angles, distances):
     points = []
     for angle, dist in zip(angles, distances):
@@ -31,7 +27,6 @@ def polar_to_cartesian(angles, distances):
         y = dist * math.sin(rad)
         points.append((x, y))
     return points
-'''
 
 # === Lecture du fichier ===
 fichier = "test500cmV1.txt"
@@ -39,10 +34,16 @@ angles, distances = lire_fichier_lidar(fichier)
 points = polar_to_cartesian(angles, distances)
 
 # Sélection des points autour de 0° (±10°)
+#alpha = 70 pour 200 mm
+#alpha = 68 pour 300 mm ; 64 pour 400 ; 56 pour 550 ; 50 pour 700
+#   46 pour 800; 42 pour 900; 38 pour 1000
+# Donc réduction de 5 alpha tous les 10 cm
+#alpha = 10 pour 4000 mm et 4500 et 5000
+alpha = 10 #math.degrees(np.arctan(650/585))
 angles_selection = []
 points_selection = []
 for ang, dist in zip(angles, distances):
-    if -10 <= ang <= 10 or ang >= 350:  # autour de 0°, tenir compte du tour
+    if -alpha <= ang <= alpha or ang >= 360-alpha :  # autour de 0°, tenir compte du tour
         rad = math.radians(ang)
         x = dist * math.cos(rad)
         y = dist * math.sin(rad)
@@ -59,21 +60,20 @@ print(f"Équation de la droite du mur : y = {a:.3f}x + {b:.3f}")
 
 # Génération des points de la droite pour le tracé
 x_min, x_max = min(x_sel), max(x_sel)
+print(max(y_sel))
 x_line = np.linspace(x_min, x_max, 100)
 y_line = a * x_line + b
-
 
 # === Affichage graphique ===
 x_vals, y_vals = zip(*points)
 plt.figure(figsize=(8,8))
-plt.scatter(x_vals, y_vals, c="red", s=5, label="Points LIDAR")
-plt.scatter(x_sel, y_sel, c="blue", s=10, label="Points mur")
+plt.scatter(x_vals, y_vals, c="red", s=3, label="Points LIDAR")
+plt.scatter(x_sel, y_sel, c="blue", s=6, label="Points mur")
 plt.plot(x_line, y_line, "g-", linewidth=2, label="Mur estimé")
 
 plt.axhline(0, color="black", linewidth=0.5)
 plt.axvline(0, color="black", linewidth=0.5)
 plt.gca().set_aspect("equal", adjustable="datalim")
-
 
 # Ajouter l’équation sur le graphique
 plt.text(
@@ -84,7 +84,6 @@ plt.text(
     verticalalignment="top",
     bbox=dict(facecolor="white", alpha=0.7, edgecolor="black")
 )
-
 
 plt.title("Nuage de points LIDAR + Droite du mur estimée")
 plt.xlabel("X (mm)")
