@@ -21,3 +21,16 @@ finally:
     lidar.stop_motor()
     lidar.disconnect()
 '''
+
+from rplidar import RPLidar
+from numpy import *
+
+lidar = RPLidar('COM5')
+
+for liste in lidar.iter_scans(min_len=5):
+    a = 1
+    while a != 0:
+        lidar.stop_motor()
+        print(liste)
+        a = int(input('Rentrez le chiffre 1 : '))
+    lidar.start_motor()
