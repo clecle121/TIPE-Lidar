@@ -10,8 +10,9 @@ from rplidar import RPLidar
 import os
 import open3d as o3d
 
+os.chdir('Position_ICP_Prof')
 # ***************************************************************
-PORT = 'COM4'
+PORT = 'COM5'
 lidar = RPLidar(PORT, baudrate=115200)
 
 lidar.start_motor()

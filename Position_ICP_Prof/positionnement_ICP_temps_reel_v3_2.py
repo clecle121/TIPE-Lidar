@@ -22,12 +22,13 @@ import os
 import open3d as o3d
 from scipy.spatial import cKDTree
 
+os.chdir('Position_ICP_Prof')
 # ***************************************************************
 # Configuration du LiDAR
 # PORT : Port série auquel le LiDAR est connecté (à adapter selon votre système)
 # baudrate : Vitesse de communication en bauds
 # max_buf_meas : Taille du buffer pour les mesures (plus grand = moins de dérive mais plus de latence)
-PORT = 'COM4'
+PORT = 'COM5'
 lidar = RPLidar(PORT, baudrate=115200)
 lidar.start_motor()  # Démarre le moteur du LiDAR
 time.sleep(1)  # Attend que le LiDAR soit prêt
