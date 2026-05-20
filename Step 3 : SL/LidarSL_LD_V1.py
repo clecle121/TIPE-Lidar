@@ -126,16 +126,20 @@ rotation_count = 0  # Compteur de rotations complètes
 TOTAL_ROTATIONS = 100  # Nombre de rotations avant affichage
 last_angle = None  # Dernier angle traité (ajusté si nécessaire)
 
-# Fonction pour ajuster l'angle (gestion du passage 360°→0°)
 def adjust_angle(current_angle, last_angle):
     """
-    Ajuste l'angle pour éviter les sauts (ex: 355° → 5° devient 355° → 365°).
+    elimine les sauts d'angle lors du passage de 360° à 0°. 
+    plus précisément les valeurs problématiques
     """
+    var = 0
     if last_angle is None:
         return current_angle
-    if current_angle < last_angle and last_angle > 350 and current_angle < 10:
-        # Passage de 360° à 0° : ajuste current_angle (ex: 5° → 365°)
-        return current_angle + 360
+    if var != 0 :
+        var -= 1
+        return last_angle + 0.8
+    if current_angle < last_angle and last_angle > 200 :
+        var = 10
+        return last_angle + 0.8
     return current_angle
 
 # Fonction pour mettre à jour le graphique
