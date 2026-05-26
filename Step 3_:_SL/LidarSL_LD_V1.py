@@ -75,7 +75,8 @@ ax.set_theta_zero_location('N')  # 0° en haut (Nord)
 ax.set_theta_direction(-1)       # Sens horaire (comme un LiDAR)
 ax.set_rmax(2000)                 # Distance maximale en mm
 ax.set_title("LiDAR D500 - Gestion du passage 360°→0°\n(Appuyez sur 'l' pour quitter)", pad=20)
-scatter = ax.scatter([], [], c=[], cmap='viridis', s=10, alpha=0.7)
+scatter_first = ax.scatter([], [], c='#E0B0FF', s=10, alpha=0.8)
+scatter_current = ax.scatter([], [], c=[], cmap='viridis', s=10, alpha=0.7)
 plt.tight_layout()
 
 # Variable pour gérer la fermeture
@@ -122,35 +123,42 @@ buf = bytearray()
 all_angles = []
 all_dists = []
 all_intensities = []
+first_tour_angles = []
+first_tour_dists = []
+first_tour_intensities = []
+first_tour_displayed = False
+compteur = 0
 rotation_count = 0  # Compteur de rotations complètes
 TOTAL_ROTATIONS = 100  # Nombre de rotations avant affichage
 last_angle = None  # Dernier angle traité (ajusté si nécessaire)
 
-def adjust_angle(current_angle, last_angle):
+def adjust_angle(current_angle, last_angle, compteur):
     """
-    elimine les sauts d'angle lors du passage de 360° à 0°. 
-    plus précisément les valeurs problématiques
+    Gère les sauts d'angle lors du passage de 360° à 0°.
+    Renvoie toujours un angle ajusté et la valeur mise à jour de compteur.
     """
-    var = 0
     if last_angle is None:
-        return current_angle
-    if var != 0 :
-        var -= 1
-        return last_angle + 0.8
-    if current_angle < last_angle and last_angle > 200 :
-        var = 10
-        return last_angle + 0.8
-    return current_angle
+        return current_angle, compteur
+    if compteur != 0:
+        return last_angle + 0.8, compteur - 1
+    if current_angle < last_angle and last_angle > 200:
+        return last_angle + 0.8, 9
+    return current_angle, compteur
 
 # Fonction pour mettre à jour le graphique
 def update_plot():
     """Met à jour le graphique avec les données accumulées."""
+    if first_tour_displayed:
+        theta_first = np.deg2rad(first_tour_angles)
+        scatter_first.set_offsets(np.column_stack((theta_first, first_tour_dists)))
+
     if len(all_angles) > 0:
         # Convertir les angles ajustés en radians pour matplotlib
         theta = np.deg2rad(all_angles)
-        scatter.set_offsets(np.column_stack((theta, all_dists)))
-        scatter.set_array(all_intensities)
-        plt.draw()
+        scatter_current.set_offsets(np.column_stack((theta, all_dists)))
+        scatter_current.set_array(all_intensities)
+
+    plt.draw()
 
 # Boucle principale de capture
 try:
@@ -180,12 +188,7 @@ try:
                 if result:
                     # Traiter chaque point de la trame
                     for p in result:
-                        if 0 <= p['dist_mm'] <= 35:
-                            continue
-
-                        current_angle = p['angle']
-                        adjusted_angle = adjust_angle(current_angle, last_angle)
-
+                        adjusted_angle, compteur = adjust_angle(p['angle'], last_angle, compteur)
                         # Mettre à jour last_angle avec l'angle ajusté
                         last_angle = adjusted_angle
 
@@ -198,6 +201,11 @@ try:
 
                     # Afficher toutes les TOTAL_ROTATIONS rotations
                     if rotation_count >= TOTAL_ROTATIONS:
+                        if not first_tour_displayed:
+                            first_tour_angles = list(all_angles)
+                            first_tour_dists = list(all_dists)
+                            first_tour_intensities = list(all_intensities)
+                            first_tour_displayed = True
                         update_plot()
                         # Réinitialiser les données pour les prochaines rotations
                         all_angles = []
