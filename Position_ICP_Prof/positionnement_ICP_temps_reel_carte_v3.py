@@ -30,10 +30,11 @@ os.makedirs(save_dir, exist_ok=True)
 
 # ***************************************************************
 # Charger la carte existante (Nx3)
-global_map = np.loadtxt("carte.txt", skiprows=1)
+global_map = np.loadtxt("carte1_car.txt", skiprows=1)
 
 # ----- Choisir un point de la carte comme origine -----
-origin_index = 50
+#origin_index = 50
+origin_index = 324
 origin = global_map[origin_index]  # [x0, y0, z0]
 
 # ----- Orientation initiale : angle pour aligner la carte sur X -----
