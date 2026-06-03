@@ -25,20 +25,6 @@ def lire_fichier_lidar(nom_fichier):
                 continue
     return angles, distances
 
-    angles = []
-    distances = []
-    with open(nom_fichier, "r") as f:
-        for ligne in f:
-            if ligne.startswith("#") or "Angule" in ligne:
-                continue
-            try:
-                angle, distance, quality = ligne.split()
-                angles.append(float(angle))
-                distances.append(float(distance))
-            except ValueError:
-                continue
-    return angles, distances
-
 def noms_fichiers(list_distances,numero):
     '''
     Permet de créer et stocker rapidement le nom de tout les fichiers de mesure du lidar.
@@ -86,7 +72,7 @@ def polar_to_cartesian(angles, distances):
     points_x = []
     points_y = []
     for angle, dist in zip(angles, distances):
-        rad = math.radians(angle)
+        rad =  - (math.radians(angle))
         x = dist * math.cos(rad)
         points_x.append(x)
         y = dist * math.sin(rad)
