@@ -1,7 +1,6 @@
 import os
 import math
-
-os.chdir('Position_ICP_Prof')
+os.chdir('test_capteur\salle_de_classe')
 
 def lire_fichier_lidar(nom_fichier):
     angles, distances = [], []
@@ -17,14 +16,12 @@ def lire_fichier_lidar(nom_fichier):
                 continue
     return angles, distances
 
-alpha = 30  # secteur angulaire ± autour de 0°
-
-fichier = "carte1_pol.txt"
+fichier = "carte.txt"
 angles, distances = lire_fichier_lidar(fichier)
 
-with open('carte1_car.txt', 'w') as nv_fichier:
+with open('carte_car.txt', 'w') as nv_fichier:
     for ang, dist in zip(angles, distances):
         rad = math.radians(ang)
-        x = (dist * math.cos(rad)) / 1000
-        y = dist * math.sin(rad) / 1000
+        x = (dist * math.cos(-rad)) / 1000 #division par 1000 pour avoir les valeurs en m
+        y = (dist * math.sin(-rad)) / 1000 #division par 1000 pour avoir les valeurs en m
         nv_fichier.write(f"{round(x, 2)} {round(y, 2)} 0\n")
