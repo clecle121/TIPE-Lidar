@@ -24,16 +24,14 @@ for ang, dist in zip(angles, distances): #Voir l'explication sur GPT pour le zip
         x = dist * math.cos(rad)
         y = dist * math.sin(rad)
         angles_selection.append(ang)
-        points_selection.append((x, y))
-        
-'''
+        points_selection.append((x, y))'''
+
 points = []
 
 for ang, dist in zip(angles, distances):
     rad = - (math.radians(ang))
     x = dist * math.cos(rad)
     y = dist * math.sin(rad)
-
     points.append((ang, x, y))
 
 point_ref = min(
@@ -43,7 +41,7 @@ point_ref = min(
 
 x_ref = point_ref[1]
 
-tol_x = 10
+tol_x = 13
 
 points_selection = [
     (x, y)
