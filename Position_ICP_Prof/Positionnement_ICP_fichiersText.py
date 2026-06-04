@@ -36,7 +36,9 @@ o3d.io.write_point_cloud("scan_1.pcd", pcd, write_ascii=True)
 
 #points = np.loadtxt("scan_2.txt")  # shape (N, 3)
 #points = np.loadtxt("scan_sl_11_car.txt")
-points = np.loadtxt("scan_sl_21_car.txt")
+#points = np.loadtxt("scan_sl_21_car.txt")
+#points = np.loadtxt("scan_sl_31_car.txt")
+points = np.loadtxt("scan_sl_41_car.txt")
 
 # Créer le point cloud
 pcd = o3d.geometry.PointCloud()

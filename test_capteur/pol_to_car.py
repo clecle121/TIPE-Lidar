@@ -1,7 +1,7 @@
 import os
 import math
 #os.chdir('test_capteur\salle_de_classe')
-os.chdir("Position_ICP_Prof\SL\point2")
+os.chdir("Position_ICP_Prof\SL\point4")
 
 def lire_fichier_lidar(nom_fichier):
     angles, distances = [], []
@@ -17,10 +17,10 @@ def lire_fichier_lidar(nom_fichier):
                 continue
     return angles, distances
 
-fichier = "scan_sl_21.txt"
+fichier = "scan_sl_41.txt"
 angles, distances = lire_fichier_lidar(fichier)
 
-with open('scan_sl_21_car.txt', 'w') as nv_fichier:
+with open('scan_sl_41_car.txt', 'w') as nv_fichier:
     for ang, dist in zip(angles, distances):
         rad = math.radians(ang)
         x = (dist * math.cos(-rad)) / 1000 #division par 1000 pour avoir les valeurs en m
