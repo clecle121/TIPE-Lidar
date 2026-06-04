@@ -20,11 +20,38 @@ points_x, points_y = polar_to_cartesian(angles, distances)
 points_selection = []
 for ang, dist in zip(angles, distances): #Voir l'explication sur GPT pour le zip mais en vif permet de prendre un part un les éléments de 2 listes pour en faire des trucs.
     if -70 <= ang <= 70 or ang >= 290: #Permet de prendre en compte uniquement les valeurs autour de ±10°
-        rad = math.radians(ang) #Convertit les angles de ° à rad
+        rad = - (math.radians(ang)) #Convertit les angles de ° à rad
         x = dist * math.cos(rad)
         y = dist * math.sin(rad)
         angles_selection.append(ang)
-        points_selection.append((x, y))'''
+        points_selection.append((x, y))
+        
+'''
+points = []
+
+for ang, dist in zip(angles, distances):
+    rad = - (math.radians(ang))
+    x = dist * math.cos(rad)
+    y = dist * math.sin(rad)
+
+    points.append((ang, x, y))
+
+point_ref = min(
+    points,
+    key=lambda p: min(abs(p[0]), abs(p[0] - 360))
+)
+
+x_ref = point_ref[1]
+
+tol_x = 10
+
+points_selection = [
+    (x, y)
+    for ang, x, y in points
+    if abs(x - x_ref) < tol_x
+]
+
+
 
 
 # === Éstimation du mur ===
@@ -66,7 +93,7 @@ print("angle obtenu :", erreur_angle)
 # === Création du graphique ===
 plt.figure(figsize=(8,8))
 plt.scatter(points_x, points_y, c="red", s=5, label="Points LIDAR") #"c" permet de modifier les couleurs des points et "s" permet de modifier la taille des points.
-plt.scatter(x_sel, y_sel, c="blue", s=10, label="Points mur")
+plt.scatter(x_sel, y_sel, c="blue", s=5, label="Points mur")
 plt.plot(x_line, y_line, "g-", linewidth=2, label="Mur estimé")
 plt.plot(x_perpen, y_perpen, "m-", linewidth=2, label="droite perpend au mur")
 plt.axhline(0, color="black", linewidth=0.5) #permet de placer une ligne horizontale sur le graphique

@@ -24,7 +24,7 @@ def lire_fichier_lidar(nom_fichier):
 
 def polar_to_cartesian(angles, distances):
     if isinstance(angles, float) and isinstance(distances, float):
-        rad = math.radians(angles)
+        rad = - (math.radians(angles))
         x = distances * math.cos(rad)
         y = distances * math.sin(rad)
         return x, y
@@ -32,7 +32,7 @@ def polar_to_cartesian(angles, distances):
         x_coords = []
         y_coords = []
         for angle, dist in zip(angles, distances):
-            rad = math.radians(angle)
+            rad = - (math.radians(angle))
             x = dist * math.cos(rad)
             y = dist * math.sin(rad)
             x_coords.append(x)

@@ -17,7 +17,7 @@ angles_selection = []
 points_selection = []
 for ang, dist in zip(angles, distances): #Voir l'explication sur GPT pour le zip mais en vif permet de prendre un part un les éléments de 2 listes pour en faire des trucs.
     if -10 <= ang <= 10 or ang >= 350: #Permet de prendre en compte uniquement les valeurs autour de ±10°
-        rad = math.radians(ang) #Convertit les angles de ° à rad
+        rad = - (math.radians(ang)) #Convertit les angles de ° à rad
         x = dist * math.cos(rad)
         y = dist * math.sin(rad)
         angles_selection.append(ang)
