@@ -12,7 +12,8 @@ import open3d as o3d
 import numpy as np
 import os
 
-os.chdir('Position_ICP_Prof') #Permet de changer le répertoire de travail. Ici je déplace le répertoire de travail dans le dossier "Position_ICP_Prof" pour avoir accès au fichier qui se trouve à l'intérieur.
+#os.chdir('Position_ICP_Prof') #Permet de changer le répertoire de travail. Ici je déplace le répertoire de travail dans le dossier "Position_ICP_Prof" pour avoir accès au fichier qui se trouve à l'intérieur.
+os.chdir('Position_ICP_Prof/traitement_SL')
 
 
 # Charge deux scans consecutifs LiDAR
@@ -22,7 +23,9 @@ os.chdir('Position_ICP_Prof') #Permet de changer le répertoire de travail. Ici 
 
 # Conversion TXT -> PCD
 
-points = np.loadtxt("scan_1.txt")  # shape (N, 3)
+#points = np.loadtxt("scan_1.txt")  # shape (N, 3)
+points = np.loadtxt("carte_car.txt")
+
 
 # Créer le point cloud
 pcd = o3d.geometry.PointCloud()
@@ -31,7 +34,9 @@ pcd.points = o3d.utility.Vector3dVector(points)
 # Sauvegarder en PCD
 o3d.io.write_point_cloud("scan_1.pcd", pcd, write_ascii=True)
 
-points = np.loadtxt("scan_2.txt")  # shape (N, 3)
+#points = np.loadtxt("scan_2.txt")  # shape (N, 3)
+#points = np.loadtxt("scan_sl_11_car.txt")
+points = np.loadtxt("scan_sl_21_car.txt")
 
 # Créer le point cloud
 pcd = o3d.geometry.PointCloud()
